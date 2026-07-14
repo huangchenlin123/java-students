@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>学生管理 - 查询</title>
+    <link th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<nav class="navbar navbar-light bg-white shadow-sm mb-4">
+    <div class="container">
+        <a href="/menu" class="navbar-brand mb-0 h1">🎓 学生管理系统</a>
+        <div class="d-flex align-items-center gap-3">
+            <a href="/menu" class="btn btn-outline-secondary btn-sm">← 主菜单</a>
+            <small class="text-muted d-none d-md-inline">
+                <span th:text="${session.loginUser}"></span>
+            </small>
+            <a href="/logout" class="btn btn-outline-danger btn-sm">退出</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <!-- 标题 -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h4">📋 学生列表</h1>
+        <div>
+            <a th:href="@{/students/page/add}" class="btn btn-primary">
+                + 添加学生
+            </a>
+        </div>
+    </div>
+
+    <!-- 操作提示消息 -->
+    <div th:if="${message}" class="alert alert-success alert-dismissible fade show" role="alert">
+        <span th:text="${message}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+
+    <!-- 学生列表表格 -->
+    <div class="card shadow-sm">
+        <div class="card-body p-0">
+            <div th:if="${#lists.isEmpty(students)}" class="text-center py-5 text-muted">
+                <p class="fs-5 mb-0">暂无学生数据</p>
+                <p class="small">点击右上角「添加学生」开始录入</p>
+            </div>
+            <table th:if="${!#lists.isEmpty(students)}" class="table table-hover mb-0">
+                <thead class="table-light">
+                <tr>
+                    <th>学号</th>
+                    <th>姓名</th>
+                    <th>年龄</th>
+                    <th>性别</th>
+                    <th style="width: 180px;">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="student : ${students}">
+                    <td th:text="${student.id}" class="fw-semibold"></td>
+                    <td th:text="${student.name}"></td>
+                    <td th:text="${student.age}"></td>
+                    <td th:text="${student.sex}"></td>
+                    <td>
+                        <a th:href="@{/students/page/edit/{id}(id=${student.id})}"
+                           class="btn btn-sm btn-outline-primary me-1">✏️ 编辑</a>
+                        <a th:href="@{/students/page/delete/{id}(id=${student.id})}"
+                           class="btn btn-sm btn-outline-danger"
+                           onclick="return confirm('确定要删除该学生吗？')">🗑️ 删除</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 统计信息 -->
+    <div th:if="${!#lists.isEmpty(students)}" class="mt-3 text-muted small">
+        共 <span th:text="${#lists.size(students)}"></span> 名学生
+    </div>
+</div>
+
+<script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

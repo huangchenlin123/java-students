@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>学生管理系统 - 主菜单</title>
+    <link th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}" rel="stylesheet">
+    <style>
+        body { background: #f0f2f5; }
+        .card-menu { transition: transform 0.2s, box-shadow 0.2s; cursor: pointer; border: none; border-radius: 1rem; }
+        .card-menu:hover { transform: translateY(-5px); box-shadow: 0 0.5rem 1.5rem rgba(0,0,0,0.15); }
+        .card-menu .card-body { padding: 2rem; }
+        .icon-circle { width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.8rem; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-light bg-white shadow-sm mb-4">
+    <div class="container">
+        <span class="navbar-brand mb-0 h1">🎓 学生管理系统</span>
+        <div class="d-flex align-items-center gap-3">
+            <small class="text-muted">欢迎，<span th:text="${session.loginUser}"></span></small>
+            <a href="/logout" class="btn btn-outline-danger btn-sm">退出登录</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container py-4">
+    <h3 class="mb-4 text-center text-muted">请选择功能</h3>
+
+    <div class="row g-4 justify-content-center">
+
+        <!-- 1. 查询学生 -->
+        <div class="col-md-5 col-lg-3">
+            <a href="/students/page" class="text-decoration-none">
+                <div class="card card-menu text-center h-100">
+                    <div class="card-body">
+                        <div class="icon-circle bg-primary bg-opacity-10 text-primary">🔍</div>
+                        <h5 class="card-title">查询学生</h5>
+                        <p class="card-text small text-muted">查看全部学生信息列表</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- 2. 添加学生 -->
+        <div class="col-md-5 col-lg-3">
+            <a href="/students/page/add" class="text-decoration-none">
+                <div class="card card-menu text-center h-100">
+                    <div class="card-body">
+                        <div class="icon-circle bg-success bg-opacity-10 text-success">➕</div>
+                        <h5 class="card-title">添加学生</h5>
+                        <p class="card-text small text-muted">录入新的学生信息</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- 3. 修改学生 -->
+        <div class="col-md-5 col-lg-3">
+            <a href="/students/page" class="text-decoration-none">
+                <div class="card card-menu text-center h-100">
+                    <div class="card-body">
+                        <div class="icon-circle bg-warning bg-opacity-10 text-warning">✏️</div>
+                        <h5 class="card-title">修改学生</h5>
+                        <p class="card-text small text-muted">编辑已有学生信息</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- 4. 删除学生 -->
+        <div class="col-md-5 col-lg-3">
+            <a href="/students/page" class="text-decoration-none">
+                <div class="card card-menu text-center h-100">
+                    <div class="card-body">
+                        <div class="icon-circle bg-danger bg-opacity-10 text-danger">🗑️</div>
+                        <h5 class="card-title">删除学生</h5>
+                        <p class="card-text small text-muted">移除学生记录</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+    </div>
+</div>
+
+<script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
