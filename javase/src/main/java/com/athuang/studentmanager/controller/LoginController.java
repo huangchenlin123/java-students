@@ -34,7 +34,7 @@ public class LoginController {
             session.setAttribute("loginUser", username);
             return "redirect:/menu";
         }
-        attr.addFlashAttribute("error", "用户名或密码错误！");
+        attr.addFlashAttribute("error", "小菜鸡,登陆失败了！");
         return "redirect:/login";
     }
 
